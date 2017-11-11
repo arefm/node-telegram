@@ -4,8 +4,6 @@
   "description": "Create Telegram Bots with Node.js",
   "main": "bin/run",
   "scripts": {
-    "start": "node .",
-    "dev": "node-dev .",
     "ngrok": "./bin/ngrok http 127.0.0.1:7000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
