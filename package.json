@@ -25,10 +25,10 @@
   "author": "Aref Mirhosseini <code@arefm.me> (http://arefm.me)",
   "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/arefm/node-telegram/issues",
+    "url": "https://github.com/arefm/telegrambotapi/issues",
     "email": "code@arefm.me"
   },
-  "homepage": "https://github.com/arefm/node-telegram#readme",
+  "homepage": "https://github.com/arefm/telegrambotapi#readme",
   "@std/esm": {
     "esm": "all",
     "cjs": true
