@@ -1,6 +1,6 @@
 {
   "name": "telegrambotapi",
-  "version": "1.0.0",
+  "version": "1.0.0-beta-1",
   "description": "Create Telegram Bots with Node.js",
   "main": "bin/run",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "keywords": [
     "bot",
+    "api",
     "telegram",
     "node"
   ],
@@ -36,10 +37,6 @@
   },
   "dependencies": {
     "@std/esm": "^0.13.0",
-    "request": "^2.83.0",
     "request-promise": "^4.2.2"
-  },
-  "devDependencies": {
-    "node-dev": "^3.1.3"
   }
 }
