@@ -1,5 +1,5 @@
 /**
- * 
+ * @author Aref Mirhosseini <code@arefmirhosseini.com> (http://arefmirhosseini.com)
  */
 
 import rp from 'request-promise'
@@ -29,7 +29,7 @@ class TelegramClient {
         })
     }
 
-    SetHook(url, options = {}) {
+    SetHook(url, options = {}, callback) {
         if (typeof url === 'undefined') {
             throw new Error('You have to set "listenerUrl" before injecting client listener.').message
             return
@@ -41,13 +41,11 @@ class TelegramClient {
                 json: true,
                 body: opts
             })
-            .then(hook => {
-                console.log(`ListenerUrl: ${hook.result} / ${hook.description}`)
-            })
+            .then(hook => callback(hook))
             .catch(this.ErrorHandler)
     }
 
-    ReplyMessage(ChatID, text, opts = {}) {
+    ReplyMessage(ChatID, text, opts = {}, callback) {
         if (typeof ChatID === 'undefined') {
             throw new Error('You have to set "chat id" before replying.').message
             return
@@ -62,11 +60,8 @@ class TelegramClient {
             json: true,
             body: reqBody
         })
-        .then(resp => {
-            console.log('Message Sent: %j', resp)
-        })
+        .then(resp => callback(resp))
         .catch(this.ErrorHandler)
-        return { message: `sending message to chat:${ChatID}...` }
     }
 
     ErrorHandler(err) {
