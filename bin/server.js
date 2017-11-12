@@ -29,7 +29,7 @@ class TelegramClient {
         })
     }
 
-    SetHook(url, options = {}, callback) {
+    SetHook(url, options = {}, callback = this.ResponseHandler) {
         if (typeof url === 'undefined') {
             throw new Error('You have to set "listenerUrl" before injecting client listener.').message
             return
@@ -45,7 +45,7 @@ class TelegramClient {
             .catch(this.ErrorHandler)
     }
 
-    ReplyMessage(ChatID, text, opts = {}, callback) {
+    ReplyMessage(ChatID, text, opts = {}, callback = this.ResponseHandler) {
         if (typeof ChatID === 'undefined') {
             throw new Error('You have to set "chat id" before replying.').message
             return
@@ -62,6 +62,10 @@ class TelegramClient {
         })
         .then(resp => callback(resp))
         .catch(this.ErrorHandler)
+    }
+
+    ResponseHandler(resp) {
+        return resp
     }
 
     ErrorHandler(err) {
