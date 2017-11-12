@@ -8,7 +8,6 @@ import { telegram as configs } from '../configs/configs'
 class TelegramClient {
 
     constructor(ApiToken) {
-        // console.log(process.env.npm_package_config_baseUrl)
         this.ApiReq = rp.defaults({
             baseUrl: `${configs.base_url}${ApiToken}`,
             headers: { 'Content-Type': 'application/json' }
@@ -64,7 +63,7 @@ class TelegramClient {
             body: reqBody
         })
         .then(resp => {
-            debug('Message Sent: %j', resp)
+            console.log('Message Sent: %j', resp)
         })
         .catch(this.ErrorHandler)
         return { message: `sending message to chat:${ChatID}...` }
