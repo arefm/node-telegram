@@ -60,7 +60,10 @@ class TelegramClient {
             json: true,
             body: reqBody
         })
-        .then(resp => callback(resp))
+        .then(resp => {
+            callback(resp)
+            return null
+        })
         .catch(this.ErrorHandler)
     }
 
