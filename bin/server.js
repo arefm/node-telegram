@@ -15,7 +15,8 @@ class TelegramClient {
         
         return {
             listen: this.ListenMessages.bind(this),
-            reply: this.ReplyMessage.bind(this)
+            reply: this.ReplyMessage.bind(this),
+            inlineReply: this.InlineReplyMessage.bind(this)
         }
     }
 
@@ -68,6 +69,42 @@ class TelegramClient {
         }, opts)
         this.ApiReq({
             url: '/sendMessage',
+            method: 'POST',
+            json: true,
+            body: reqBody
+        })
+        .then(resp => {
+            callback(resp)
+            return null
+        })
+        .catch(this.ErrorHandler)
+    }
+
+    InlineReplyMessage(inlineQueryId, results = [], opts = { cache_time, is_personal, next_offset, switch_pm_text, switch_pm_parameter }) {
+        if (typeof inlineQueryId === 'undefined') {
+            throw new Error('You have to set "inline query id" before replying.').message
+            return
+        }
+        switch (this.GetObjType(results)) {
+            case 'string':
+                results = results.split(',')
+                break
+            case 'array':
+                results = results
+                break
+            default:
+                results = []
+        }
+        if (!results.length) {
+            throw new Error('You have to set at least one result for replying.').message
+            return
+        }
+        let reqBody = Object.assign({}, {
+            inline_query_id: inlineQueryId,
+            results: results
+        }, opts)
+        this.ApiReq({
+            url: '/answerInlineQuery',
             method: 'POST',
             json: true,
             body: reqBody
