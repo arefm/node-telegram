@@ -80,7 +80,7 @@ class TelegramClient {
         .catch(this.ErrorHandler)
     }
 
-    InlineReplyMessage(inlineQueryId, results = [], opts = { cache_time, is_personal, next_offset, switch_pm_text, switch_pm_parameter }) {
+    InlineReplyMessage(inlineQueryId, results = [], opts = {}) {
         if (typeof inlineQueryId === 'undefined') {
             throw new Error('You have to set "inline query id" before replying.').message
             return
