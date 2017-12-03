@@ -16,7 +16,8 @@ class TelegramClient {
         return {
             listen: this.ListenMessages.bind(this),
             reply: this.ReplyMessage.bind(this),
-            inlineReply: this.InlineReplyMessage.bind(this)
+            inlineReply: this.InlineReplyMessage.bind(this),
+            keyboard: this.GenerateKeyboard.bind(this)
         }
     }
 
@@ -114,6 +115,16 @@ class TelegramClient {
             return null
         })
         .catch(this.ErrorHandler)
+    }
+
+    GenerateKeyboard(keys = [], opts = {
+        resize_keyboard: true,
+        one_time_keyboard: false,
+        selective: true
+    }) {
+        return Object.assign({}, {
+            keyboard: keys
+        }, opts)
     }
 
     ResponseHandler(resp) {
