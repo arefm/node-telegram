@@ -19,13 +19,25 @@ class TelegramClient {
         }
     }
 
-    ListenMessages(baseHookUrl) {
+    ListenMessages(baseHookUrl, allowedUpdates = []) {
         if (typeof baseHookUrl === 'undefined') {
             throw new Error('You have to set "listenerUrl" before injecting client listener.').message
             return
         }
+        switch (this.GetObjType(allowedUpdates)) {
+            case 'string':
+                allowedUpdates = allowedUpdates.split(',')
+            break
+            case 'array':
+                allowedUpdates = allowedUpdates
+            break
+            default:
+                allowedUpdates = []
+        }
+        if (!allowedUpdates.length)
+            allowedUpdates = ['message', 'callback_query']
         this.SetHook(baseHookUrl, {
-            allowed_updates: ['message', 'callback_query']
+            allowed_updates: allowedUpdates
         })
     }
 
@@ -73,6 +85,10 @@ class TelegramClient {
 
     ErrorHandler(err) {
         throw new Error(err)
+    }
+
+    GetObjType(Obj) {
+        return Object.prototype.toString.call(Obj).substr(8).match(/(.+)?\]/)[1].toLowerCase()
     }
 
 }
