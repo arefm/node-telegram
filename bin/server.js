@@ -120,7 +120,7 @@ class TelegramClient {
     GenerateKeyboard(keys = [], opts = {
         resize_keyboard: true,
         one_time_keyboard: false,
-        selective: true
+        selective: false
     }) {
         return Object.assign({}, {
             keyboard: keys
